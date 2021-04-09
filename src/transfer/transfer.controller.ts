@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { TransferService, EntryService } from './transfer.service';
 import { TransferDto, EntryDto } from './dto/transfer.dto';
@@ -46,7 +47,8 @@ export class TransferController {
     return this.service.findOne(id);
   }
   @Get()
-  findAll(): Promise<TransferDto[]> {
-    return this.service.findAll();
+  findAll(@Query() query): Promise<TransferDto[]> {
+    let accountId = query['accountId'];
+    return this.service.findAll(accountId);
   }
 }

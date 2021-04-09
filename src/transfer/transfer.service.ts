@@ -17,8 +17,10 @@ export class TransferService {
   findOne(id: number): Promise<TransferDto> {
     return this.repository.findOne({ id: id });
   }
-  findAll(): Promise<TransferDto[]> {
-    return this.repository.find();
+  findAll(accountId: number): Promise<TransferDto[]> {
+    return this.repository.find({
+      where: [{ fromAccountId: accountId }, { toAccountId: accountId }],
+    });
   }
 }
 
