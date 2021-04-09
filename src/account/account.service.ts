@@ -20,4 +20,7 @@ export class AccountService {
   findAll(customerId: string): Promise<AccountDto[]> {
     return this.repository.find({ customerId: parseInt(customerId) });
   }
+  update(id: number, account: AccountDto): Promise<any> {
+    return this.repository.update(id, account);
+  }
 }

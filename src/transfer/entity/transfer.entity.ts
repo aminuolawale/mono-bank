@@ -12,3 +12,15 @@ export class TransferEntity {
   @Column({ default: new Date() })
   dateCreated: Date;
 }
+
+@Entity()
+export class EntryEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column({ nullable: false })
+  accountId: number;
+  @Column({ nullable: false })
+  amount: number;
+  @Column({ nullable: false, default: new Date() })
+  dateCreated: Date;
+}

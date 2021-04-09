@@ -12,3 +12,14 @@ export class TransferDto {
   @IsDate()
   dateCreated: Date;
 }
+
+export class EntryDto {
+  @IsNumber()
+  id: number;
+  @IsNumber()
+  accountId: number;
+  @IsNumber()
+  amount: number;
+  @IsDate()
+  dateCreated: Date;
+}

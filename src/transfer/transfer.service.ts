@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { TransferDto } from './dto/transfer.dto';
+import { TransferDto, EntryDto } from './dto/transfer.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TransferEntity } from './entity/transfer.entity';
+import { TransferEntity, EntryEntity } from './entity/transfer.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -18,6 +18,24 @@ export class TransferService {
     return this.repository.findOne({ id: id });
   }
   findAll(): Promise<TransferDto[]> {
+    return this.repository.find();
+  }
+}
+
+@Injectable()
+export class EntryService {
+  constructor(
+    @InjectRepository(EntryEntity)
+    private repository: Repository<EntryEntity>,
+  ) {}
+  create(transfer: EntryDto): Promise<EntryDto> {
+    return this.repository.save(transfer);
+  }
+
+  findOne(id: number): Promise<EntryDto> {
+    return this.repository.findOne({ id: id });
+  }
+  findAll(): Promise<EntryDto[]> {
     return this.repository.find();
   }
 }
