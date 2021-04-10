@@ -1,12 +1,31 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { AccountDto } from './dto/account.dto';
 import { AccountService } from './account.service';
-
+import { CustomerService } from './../customer/customer.service';
 @Controller('account')
 export class AccountController {
-  constructor(private service: AccountService) {}
+  constructor(
+    private service: AccountService,
+    private customerService: CustomerService,
+  ) {}
   @Post()
-  create(@Body() account: AccountDto): Promise<AccountDto> {
+  async create(@Body() account: AccountDto): Promise<AccountDto> {
+    const customer = await this.customerService.findOne(account.customerId);
+    if (!customer) {
+      throw new HttpException(
+        `Customer with id ${account.customerId} not found`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     return this.service.create(account);
   }
 

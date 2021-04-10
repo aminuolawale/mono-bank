@@ -21,6 +21,8 @@ export class EntryEntity {
   accountId: number;
   @Column({ nullable: false })
   amount: number;
+  @Column({ nullable: false })
+  type: string;
   @Column({ nullable: false, default: new Date() })
   dateCreated: Date;
 }

@@ -37,7 +37,9 @@ export class EntryService {
   findOne(id: number): Promise<EntryDto> {
     return this.repository.findOne({ id: id });
   }
-  findAll(): Promise<EntryDto[]> {
-    return this.repository.find();
+  findAll(accountId: number): Promise<EntryDto[]> {
+    return this.repository.find({
+      where: [{ accountId: accountId }],
+    });
   }
 }

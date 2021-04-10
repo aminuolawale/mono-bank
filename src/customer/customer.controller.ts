@@ -6,6 +6,8 @@ import {
   Delete,
   Body,
   Param,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CustomerDto } from './dto/customer.dto';
@@ -28,7 +30,10 @@ export class CustomerController {
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() customer: CustomerDto): Promise<any> {
+  async update(
+    @Param('id') id: number,
+    @Body() customer: CustomerDto,
+  ): Promise<any> {
     return this.service.update(id, customer);
   }
 

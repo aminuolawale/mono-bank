@@ -20,6 +20,8 @@ export class EntryDto {
   accountId: number;
   @IsNumber()
   amount: number;
+  @IsString()
+  type: string;
   @IsDate()
   dateCreated: Date;
 }

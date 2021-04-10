@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CustomerService } from './customer.service';
-import { InjectRepository } from '@nestjs/typeorm';
 
 describe('CustomerService', () => {
   let service: CustomerService;
